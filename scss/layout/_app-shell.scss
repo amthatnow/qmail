@@ -1,0 +1,220 @@
+@use "../abstracts" as *;
+
+// hovedlayout med sidebar + content
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  padding: 0 16px 16px;
+
+  // bruges på email-siden hvor sidebaren er skjult
+  &--single { grid-template-columns: 1fr; }
+}
+
+// venstre sidebar
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 8px 0 0;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 32px;
+    border-radius: 0 16px 16px 0;
+    color: $text;
+    font-size: 14px;
+    font-weight: 500;
+
+    &:hover { background: $soft; }
+    &.is-active { background: $blue-light; color: $blue; }
+  }
+}
+
+.badge {
+  font-size: 12px;
+  color: $muted;
+  &:empty { display: none; }
+}
+
+// indbakke-liste
+.content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.emaillist {
+  @include card;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// faner (Primary / Promotions / Social)
+.tabs {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid $line;
+
+  &__spacer { flex: 1; }
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  border-bottom: 3px solid transparent;
+  color: $muted;
+  font-size: 14px;
+  flex: 0 1 280px;
+
+  &:hover { background: $soft; }
+  &.is-active {
+    color: $blue;
+    border-bottom-color: $blue;
+    font-weight: 500;
+  }
+}
+
+// rækker i indbakken
+.rows { overflow-y: auto; }
+
+.row {
+  border-bottom: 1px solid $line;
+  &:hover {
+    background: #fff;
+    box-shadow: inset 0 0 0 1px $line;
+  }
+
+  &__link {
+    display: grid;
+    grid-template-columns: 22px 180px 1fr auto 80px;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    color: $text;
+  }
+
+  &__star { color: $muted; }
+
+  &__sender,
+  &__main {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__preview { color: $muted; }
+
+  &__date {
+    color: $muted;
+    font-size: 12px;
+    text-align: right;
+  }
+
+  &.is-unread {
+    background: $card;
+    .row__sender, .row__subject, .row__date {
+      font-weight: 700;
+      color: $text;
+    }
+  }
+
+  &.is-read {
+    background: #f2f4f7;
+    .row__sender, .row__subject { color: $muted; }
+  }
+}
+
+.empty {
+  padding: 48px 16px;
+  text-align: center;
+  color: $muted;
+}
+
+// email-detaljevisning
+.emailview {
+  @include card;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 110px);
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-bottom: 1px solid $line;
+  }
+
+  &__body {
+    padding: 24px 32px;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    flex: 1;
+  }
+
+  &__head { margin-bottom: 24px; }
+
+  &__subject {
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  &__meta {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px 16px;
+    align-items: start;
+    margin-bottom: 24px;
+  }
+
+  &__from { font-size: 14px; }
+
+  &__content {
+    margin-left: 56px;
+    font-size: 15px;
+    line-height: 1.6;
+
+    p { margin: 0 0 14px; }
+    .link { color: $blue; text-decoration: underline; }
+  }
+
+  &__actionbar {
+    border-top: 1px solid $line;
+    padding: 14px 16px;
+    background: $bg;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &:empty { display: none; }
+  }
+}
+
+.toolbar__spacer { flex: 1; }
+
+// hash-routing views - kun den aktive vises
+.view { display: none; &.is-active { display: block; } }
+.view--app {
+  &.is-active {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+}

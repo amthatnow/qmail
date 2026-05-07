@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Qmail - Phishing Awareness Game</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+
+    <!-- startskaerm -->
+    <section class="view" id="view-start">
+      <div class="start-page">
+        <main class="start">
+          <header class="start__brand">
+            <span class="logo-q">Q</span>
+            <h1>Qmail</h1>
+          </header>
+          <p class="start__tag">Phishing Awareness Game</p>
+          <p class="start__lede">
+            Your inbox has 20 emails. 5 of them are phishing attempts.
+            Open each email and mark it as phishing or safe. See how many you catch.
+          </p>
+          <button class="btn btn--primary btn--lg" id="startBtn" type="button">Start game</button>
+        </main>
+      </div>
+    </section>
+
+    <!-- indbakke -->
+    <section class="view view--app" id="view-inbox">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="iconbtn" id="menuBtn">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
+          </button>
+          <a class="brand" href="#/">
+            <span class="logo-q">Q</span><span class="brand__name">Qmail</span>
+          </a>
+        </div>
+        <form class="search" id="searchForm">
+          <button type="button" class="iconbtn">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5 1.49-1.49zM10 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>
+          </button>
+          <input id="searchInput" type="search" placeholder="Search mail" autocomplete="off" />
+        </form>
+        <div class="topbar__right">
+          <a class="iconbtn" href="#/" title="Restart">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 5V2L8 6l4 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg>
+          </a>
+          <span class="avatar">U</span>
+        </div>
+      </header>
+
+      <div class="layout">
+        <nav class="sidebar">
+          <button class="btn btn--compose" disabled>
+            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg>
+            Compose
+          </button>
+          <a class="sidebar__item is-active" href="#/inbox">Inbox <span class="badge" id="unreadCount">0</span></a>
+          <a class="sidebar__item" href="#">Starred</a>
+          <a class="sidebar__item" href="#">Snoozed</a>
+          <a class="sidebar__item" href="#">Sent</a>
+          <a class="sidebar__item" href="#">Drafts</a>
+          <a class="sidebar__item" href="#">Spam</a>
+          <a class="sidebar__item" href="#">Trash</a>
+        </nav>
+
+        <main class="content">
+          <section class="emaillist">
+            <div class="tabs">
+              <button class="tab is-active" data-tab="primary">Primary</button>
+              <button class="tab" data-tab="promotions">Promotions</button>
+              <button class="tab" data-tab="social">Social</button>
+              <div class="tabs__spacer"></div>
+              <button class="toggle" id="unreadToggle">Unread only</button>
+            </div>
+            <ul class="rows" id="rows"></ul>
+            <p class="empty" id="empty" hidden></p>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <!-- mail-detalje -->
+    <section class="view view--app" id="view-email">
+      <header class="topbar">
+        <div class="topbar__left">
+          <a class="brand" href="#/inbox">
+            <span class="logo-q">Q</span><span class="brand__name">Qmail</span>
+          </a>
+        </div>
+        <div class="search">
+          <span class="iconbtn">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5 1.49-1.49zM10 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>
+          </span>
+          <input type="search" placeholder="Search mail" disabled />
+        </div>
+        <div class="topbar__right">
+          <span class="avatar">U</span>
+        </div>
+      </header>
+
+      <div class="layout layout--single">
+        <main class="content">
+          <article class="emailview">
+            <div class="emailview__toolbar">
+              <a class="iconbtn iconbtn--label" href="#/inbox">
+                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></svg>
+                <span>Back</span>
+              </a>
+              <span class="toolbar__spacer"></span>
+            </div>
+            <div class="emailview__body" id="emailBody"></div>
+            <div class="emailview__actionbar" id="actionbar"></div>
+          </article>
+        </main>
+      </div>
+
+      <div class="feedback" id="feedback" hidden></div>
+    </section>
+
+    <!-- resultat -->
+    <section class="view" id="view-results">
+      <div class="start-page">
+        <main class="results">
+          <h1>Your results</h1>
+          <p class="results__sub" id="resultsSub"></p>
+          <dl class="stats" id="stats"></dl>
+          <ol class="breakdown" id="breakdown"></ol>
+          <div class="results__actions">
+            <a class="btn btn--primary" href="#/" id="playAgainBtn">Play again</a>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>

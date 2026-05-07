@@ -1,0 +1,187 @@
+@use "../abstracts" as *;
+
+// startskærm - fuld side med centreret kort
+.start-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background: $bg;
+}
+
+.start {
+  width: 100%;
+  max-width: 540px;
+  background: $card;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: $shadow;
+  text-align: center;
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    h1 { color: $muted; font-weight: 500; font-size: 28px; }
+  }
+
+  &__tag {
+    margin: 4px 0 16px;
+    color: $muted;
+    font-size: 13px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  &__lede {
+    margin: 0 0 28px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+}
+
+// feedback-popup når brugeren har svaret
+.feedback {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+  }
+
+  &__panel {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 100%;
+    max-width: 440px;
+    background: $card;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, .18);
+    display: flex;
+    flex-direction: column;
+
+    // grøn topkant ved rigtigt svar
+    &--ok  { border-top: 4px solid $green; }
+    // rød topkant ved forkert svar
+    &--bad { border-top: 4px solid $red; }
+  }
+
+  &__head {
+    padding: 20px;
+    border-bottom: 1px solid $line;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 12px;
+
+    h2 { margin-bottom: 4px; }
+  }
+
+  &__body { flex: 1; padding: 20px; overflow-y: auto; }
+
+  &__h {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: $muted;
+    margin-bottom: 12px;
+  }
+
+  &__list {
+    padding-left: 18px;
+    display: grid;
+    gap: 10px;
+    font-size: 14px;
+    list-style: disc;
+  }
+
+  &__foot {
+    padding: 14px;
+    border-top: 1px solid $line;
+
+    .btn { width: 100%; }
+  }
+}
+
+// resultat-side
+.results {
+  width: 100%;
+  max-width: 720px;
+  background: $card;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: $shadow;
+
+  h1 { font-weight: 500; font-size: 26px; margin-bottom: 4px; }
+
+  &__sub { margin-bottom: 24px; color: $muted; }
+  &__actions { margin-top: 24px; text-align: center; }
+}
+
+// statistik-grid på resultat-siden
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+
+  > div {
+    background: $bg;
+    border-radius: $radius;
+    padding: 16px;
+    text-align: center;
+  }
+
+  dt {
+    color: $muted;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  dd {
+    margin: 4px 0 0;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// breakdown-liste
+.breakdown { display: grid; gap: 6px; }
+
+.brk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: $radius;
+  background: $bg;
+
+  &__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: $radius-pill;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    background: rgba(95, 99, 104, .12);
+    color: $muted;
+  }
+
+  &--correct .brk__tag { background: rgba(30, 142, 62, .14); color: $green; }
+  &--wrong   .brk__tag,
+  &--missed  .brk__tag { background: rgba(217, 48, 37, .14); color: $red; }
+}

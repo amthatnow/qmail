@@ -1,0 +1,76 @@
+@use "../abstracts" as *;
+
+// generel knap - bruges til de fleste actions
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 10px 18px;
+  border-radius: $radius-pill;
+  border: 1px solid $line;
+  background: $card;
+  color: $text;
+  font-weight: 500;
+
+  &:hover { background: $soft; }
+
+  // den primære blå knap
+  &--primary {
+    background: $blue;
+    border-color: $blue;
+    color: #fff;
+    &:hover { background: #1765c0; }
+  }
+
+  // markér phishing
+  &--danger {
+    background: $red;
+    border-color: $red;
+    color: #fff;
+    &:hover { background: #b3271d; }
+  }
+
+  // markér safe
+  &--success {
+    background: $green;
+    border-color: $green;
+    color: #fff;
+    &:hover { background: #167030; }
+  }
+
+  &--lg { padding: 14px 28px; font-size: 15px; }
+}
+
+// rund ikonknap
+.iconbtn {
+  @include circle(40px);
+  color: $muted;
+  &:hover { background: $soft; }
+
+  &--label {
+    width: auto;
+    padding: 0 14px 0 10px;
+    gap: 6px;
+    border-radius: $radius-pill;
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+// "kun ulæste"-toggle
+.toggle {
+  align-self: center;
+  margin: 0 12px;
+  padding: 6px 14px;
+  border-radius: $radius-pill;
+  border: 1px solid $line;
+  color: $muted;
+  font-size: 12px;
+  font-weight: 500;
+  &:hover { background: $soft; }
+  &.is-on { background: $blue-light; color: $blue; border-color: $blue; }
+}

@@ -1,0 +1,46 @@
+@use "../abstracts" as *;
+
+// topbar med logo, søgefelt og avatar
+.topbar {
+  display: grid;
+  grid-template-columns: 240px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background: $bg;
+  height: $topbar-height;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-self: end;
+  }
+}
+
+// søgefelt - lyseblå pille
+.search {
+  display: flex;
+  align-items: center;
+  background: #eaf1fb;
+  border-radius: $radius;
+  padding: 4px 10px;
+  max-width: 720px;
+
+  input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    height: 40px;
+    padding: 0 8px;
+    font-size: 15px;
+    color: $text;
+  }
+}

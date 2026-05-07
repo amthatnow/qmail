@@ -1,0 +1,27 @@
+@use "variables" as *;
+
+// cirkel-mixin - bruger jeg til avatars og ikon-knapper
+@mixin circle($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+// card mixin - hvid boks med let skygge
+@mixin card {
+  background: $card;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+// kun til mobil under 560px
+@mixin mobile {
+  @media (max-width: 560px) { @content; }
+}
+
+// tablet breakpoint - bruger jeg ikke endnu men god at have
+@mixin tablet {
+  @media (max-width: 900px) { @content; }
+}
